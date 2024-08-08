@@ -96,29 +96,30 @@ async def listChronicle(ctx):
     embed = discord.Embed(title="Ship Chronicles", color=discord.Color.blue())
 
     for c in c_list:
-        item = c["Item"]
-        date = datetime.fromisoformat(c["CreatedAtUtc"])
-        ship_name = item.get("ShipName")
-        gold_earned = str(item.get("GoldEarned"))
-        captain = item.get("Gamertag")
-        days_at_sea = str(item.get("DaysAtSea"))
-        embed.add_field(
-            name="☠️" + ship_name,
-            value="Gold Earned: "
-            + "💰"
-            + gold_earned
-            + " \n"
-            + "Captain: "
-            + "🏴‍☠️"
-            + captain
-            + " \n"
-            + "Days At Sea: "
-            + "🌊"
-            + days_at_sea
-            + "\n"
-            + "Date: "
-            + date.strftime("%m/%d, %H:%M"),
-        )
+        if "Item" in c:
+            item = c["Item"]
+            date = datetime.fromisoformat(c["CreatedAtUtc"])
+            ship_name = item.get("ShipName")
+            gold_earned = str(item.get("GoldEarned"))
+            captain = item.get("Gamertag")
+            days_at_sea = str(item.get("DaysAtSea"))
+            embed.add_field(
+                name="☠️" + ship_name,
+                value="Gold Earned: "
+                + "💰"
+                + gold_earned
+                + " \n"
+                + "Captain: "
+                + "🏴‍☠️"
+                + captain
+                + " \n"
+                + "Days At Sea: "
+                + "🌊"
+                + days_at_sea
+                + "\n"
+                + "Date: "
+                + date.strftime("%m/%d, %H:%M"),
+            )
 
     await ctx.send(embed=embed)
 
